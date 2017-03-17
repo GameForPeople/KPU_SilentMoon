@@ -1,12 +1,15 @@
 #include <iostream>
 #include "RenderingMain.h"
+
 #include "glut.h"
 
-void RenderClass::RenderMain() {
-	switch (m_sceneSelect) {
+void RenderClass::RenderMain(LogoSceneClass *logo, HeliSceneClass *Heli) {
+	switch (m_sceneNow) {
 	case 1:
+		logo->Render();
 		break;
 	case 2:
+		Heli->Render();
 		break;
 	}
 
