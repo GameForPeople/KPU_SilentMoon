@@ -18,6 +18,8 @@ class LogoSceneClass {
 	CTextureLibraray m_Logo4_Mask;
 
 	CTextureLibraray m_Logo5;
+	CTextureLibraray m_Logo5_Mask;
+
 	CTextureLibraray m_Logo6;
 	CTextureLibraray m_Logo7;
 

@@ -4,13 +4,14 @@
 #include "HeliScene_Moon.h"
 #include "HeliScene_Sea.h"
 #include "HeliScene_Sky.h"
+#include "HeliScene_Helicopter.h"
 
 
 class HeliSceneClass {
-	//HelicopterClass Helic;
 	MoonClass m_MoonC;
 	SeaClass m_SeaC;
 	SkyClass m_SkyC;
+	HelicopterClass m_HeliC;
 
 public:
 	HeliSceneClass()  {};

@@ -4,6 +4,11 @@
 
 #include "TextureLib.h"
 
+#define MOON_HEIGHT 15000
+#define MOON_DIS 16000
+#define MOON_SIZE 2000
+
+
 struct MoonPos {
 	float x;
 	float y;
@@ -32,15 +37,19 @@ public:
 		m_allHeight= 0;				//파도넘실넘실효과줄거야!
 		m_heightType= 0;
 
+		m_pos.x = - 1800;
+		m_pos.y = - 100;		// ?
+		m_pos.z = MOON_DIS - 3000 ;
+
 		m_initOnoff= true;	
 	};
 	~MoonShadowClass() {};
 
 	void SetWavePos(float x, float y, float z) {
-		const float heliHeight = 500;
+		const float heliHeight = 0;
 
 		m_pos.x = x;
-		m_pos.y = y + heliHeight;
+		m_pos.y = 0;
 		m_pos.z = z;
 
 		m_pos.x -= m_quadDis * m_quadCount / 2;
@@ -77,16 +86,16 @@ public:
 	}
 	void UpdateWave() {
 		if (m_heightType == 0) {
-			m_allHeight += 2;
+			m_allHeight += 30;
 
-			if (m_allHeight == 10) {
+			if (m_allHeight == 120) {
 				m_heightType = 1;
 			}
 		}
 		else if (m_heightType == 1) {
-			m_allHeight -= 2;
+			m_allHeight -= 30;
 
-			if (m_allHeight == -8) {
+			if (m_allHeight == -120) {
 				m_heightType = 0;
 			}
 		}
@@ -95,7 +104,7 @@ public:
 			glPushMatrix();
 
 			glTranslatef(m_pos.x, m_pos.y + m_allHeight, m_pos.z);
-
+			glScalef(4,4, 4);
 			glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, 10, 0.0, 1.0, 30, 10, &ctrlpoints[0][0][0]);
 			glEnable(GL_MAP2_VERTEX_3);
 
@@ -118,13 +127,13 @@ class MoonClass {
 
 public:
 	MoonClass() {
-		m_size = 300;
+		m_size = MOON_SIZE;
 		m_pos.x = - m_size / 2;
-		m_pos.y = 0;
-		m_pos.z = 0;
+		m_pos.y = MOON_HEIGHT;
+		m_pos.z = MOON_DIS;
 
 		m_MoonShadowC.initWave();
-		m_MoonShadowC.SetWavePos(0, 0, 0);
+		//m_MoonShadowC.SetWavePos(m_pos.x, m_pos.y, m_pos.z);
 	}
 	void TransMoon(float x, float y, float z) {
 		m_pos.x = x;

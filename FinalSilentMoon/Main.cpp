@@ -25,7 +25,7 @@ using namespace std;
 #define PIE 3.141592
 
 #define VIEW_MININUM_DISTANCE 1					//뷰볼륨 최소 거리
-#define VIEW_MAXIMUM_DISTANCE 3000				//뷰볼륨 최대 거리 -> 클리핑 영역 관련.
+#define VIEW_MAXIMUM_DISTANCE 80000				//뷰볼륨 최대 거리 -> 클리핑 영역 관련.
 //현재 각도는 100도 입니다!! 
 #define SPACE_DISTANCE -1000						//공간을 얼마나 뒤로 밀 것인가.
 
@@ -70,7 +70,7 @@ void ControlScene() {
 		nowScene = 1;
 		ChangeScene(nowScene);
 	}
-	else if (nowScene == 1 && LogoSceneC.GetTextNum() == 6) {
+	else if (nowScene == 1 && LogoSceneC.GetTextNum() == 7) {
 		nowScene = 2;
 		ChangeScene(nowScene);
 		VIEW_TYPE = 1;
@@ -133,8 +133,15 @@ GLvoid drawScene()
 	glLoadIdentity();	// 좌표계 초기화
 
 	//TOOLs_DRAW();
-	DCameraC.AllMove();
+	
+	//DCameraC.AllMove();
 	DCameraC.AllRotate();
+
+	if(nowScene == 2)
+	{
+		gluLookAt(DCameraC.GetDisX(), DCameraC.GetDisY()  , DCameraC.GetDisZ(),
+			0.0 + DCameraC.GetDisX(), 0.0 + DCameraC.GetDisY(), 1000.0 + DCameraC.GetDisZ(), 0.0, 1.0, 0.0);
+	}
 
 	RenderC.RenderMain(&LogoSceneC, &HeliSceneC);
 
@@ -148,7 +155,7 @@ GLvoid Reshape(int w, int h)	// w 값은 SIZE_X, , y값은 SIZE_Y 임
 
 	if (VIEW_TYPE == 1) {
 		//입체..투영??
-		gluPerspective(100.0f, w / h, VIEW_MININUM_DISTANCE, VIEW_MAXIMUM_DISTANCE);
+		gluPerspective(90.0f, w / h, VIEW_MININUM_DISTANCE, VIEW_MAXIMUM_DISTANCE);
 		glTranslatef(0.0, 0.0, SPACE_DISTANCE); // 투영 공간을 화면 안쪽으로 이동하여 시야를 확보한다.
 	}
 	else if (VIEW_TYPE == 2) {

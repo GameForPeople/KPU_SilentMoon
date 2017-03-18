@@ -4,6 +4,8 @@
 
 #include "TextureLib.h"
 
+#define SKY_DIS 30000
+
 struct SkyPos {
 	float x;
 	float y;
@@ -17,10 +19,10 @@ class SkyClass {
 
 public:
 	SkyClass() {
-		m_size = 1000;
+		m_size = 140000;
 		m_pos.x = -m_size / 2;
 		m_pos.y = 0;
-		m_pos.z = 500;
+		m_pos.z = SKY_DIS;
 	}
 	void TransSky(float x, float y, float z) {
 		m_pos.x = x;
@@ -51,8 +53,8 @@ public:
 				{
 					glTexCoord2f(+0.0f, +1.0f);					glVertex2f(0.0f, 0.0f);
 					glTexCoord2f(+0.0f, +0.0f);					glVertex2f(0.0f, m_size);
-					glTexCoord2f(+1.0f, +0.0f);					glVertex2f(m_size, m_size);
-					glTexCoord2f(+1.0f, +1.0f);					glVertex2f(m_size, 0.0f);
+					glTexCoord2f(+1.0f, +0.0f);					glVertex2f(m_size * 2.0f, m_size);
+					glTexCoord2f(+1.0f, +1.0f);					glVertex2f(m_size * 2.0f, 0.0f);
 				}
 				glEnd();
 			}
